@@ -39,7 +39,7 @@ func main() {
 
 func handleClient(conn net.Conn) {
 	defer conn.Close()
-	unwrapped, err := net.Dial("tcp", os.Args[1])
+	unwrapped, err := net.Dial("tcp", os.Args[2])
 	if err != nil {
 		log.Printf("server: accept: %s", err)
 		return
