@@ -39,7 +39,11 @@ func main() {
 
 func handleClient(conn net.Conn) {
 	defer conn.Close()
-	unwrapped := net.Dial("tcp", os.Args[1])
+	unwrapped, err := net.Dial("tcp", os.Args[1])
+	if err != nil {
+		log.Printf("server: accept: %s", err)
+		return
+	}
 	defer unwrapped.Close()
 	go io.Copy(conn, unwrapped)
 	io.Copy(unwrapped, conn)
